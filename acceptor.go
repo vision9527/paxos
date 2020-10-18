@@ -37,6 +37,7 @@ func (a *Acceptor) RecievePrepare(arg *PrepareMsg, reply *PromiseMsg) error {
 		reply.AccepedID = a.acceptedID
 		reply.AccepedValue = a.acceptedValue
 	}
+	// TODO 持久化promise的数据
 	return nil
 }
 
@@ -52,6 +53,7 @@ func (a *Acceptor) RecieveAccept(arg *AcceptMsg, reply *AcceptedMsg) error {
 			callRpc(learnerPeer, "Learner", "RecieveAccepted", arg, &EmptyMsg{})
 		}
 	}
+	// TODO 持久化accepted的数据
 	return nil
 }
 

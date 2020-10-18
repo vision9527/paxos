@@ -80,8 +80,7 @@ func (p *Proposer) runTwoPhase() {
 				}()
 
 				promiseMsgResp, err := p.sendPrepare(peerAddr, &prepareMsgReq)
-
-				if err != nil {
+				if err != nil || prepareMsgReq.ProposeID != promiseMsgResp.ProposeID {
 					atomic.AddInt64(&promiseFailedNum, 1)
 					return
 				}
@@ -118,7 +117,6 @@ func (p *Proposer) runTwoPhase() {
 
 		for _, peerAddr := range peers {
 			go func(peerAddr string, acceptMsgReq AcceptMsg) {
-				acceptedMsgResp, err := p.sendAccept(peerAddr, &acceptMsgReq)
 				defer func() {
 					if atomic.LoadInt64(&acceptSuccessNum) >= p.getQuorumSize() {
 						acceptSuccesChan <- struct{}{}
@@ -129,7 +127,9 @@ func (p *Proposer) runTwoPhase() {
 						return
 					}
 				}()
-				if err != nil {
+
+				acceptedMsgResp, err := p.sendAccept(peerAddr, &acceptMsgReq)
+				if err != nil || acceptMsgReq.ProposeID != acceptedMsgResp.ProposeID {
 					atomic.AddInt64(&acceptFailedNum, 1)
 					return
 				}
