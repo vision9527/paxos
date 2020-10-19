@@ -50,7 +50,7 @@ func (a *Acceptor) RecieveAccept(arg *AcceptMsg, reply *AcceptedMsg) error {
 		a.acceptedID = arg.ProposeID
 		a.acceptedValue = arg.Value
 		for _, learnerPeer := range a.getLearnerPeers() {
-			callRpc(learnerPeer, "Learner", "RecieveAccepted", arg, &EmptyMsg{})
+			callRpc(learnerPeer, "Learner", "RecieveAccepted", reply, &EmptyMsg{})
 		}
 	}
 	// TODO 持久化accepted的数据

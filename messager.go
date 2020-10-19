@@ -17,12 +17,14 @@ type PromiseMsg struct {
 	AccepedValue interface{}
 }
 type AcceptMsg struct {
-	ProposeID float32
-	Value     interface{}
+	ProposeID    float32
+	AcceptorAddr string
+	Value        interface{}
 }
 type AcceptedMsg struct {
-	ProposeID float32
-	Success   bool
+	ProposeID    float32
+	AcceptorAddr string
+	Success      bool
 }
 
 type EmptyMsg struct{}

@@ -4,25 +4,36 @@ import (
 	"log"
 	"net"
 	"net/rpc"
+	"sync"
 )
 
 type Learner struct {
-	localAddr   string
-	decideValue interface{}
-	listener    net.Listener
+	mu            sync.Mutex
+	localAddr     string
+	acceptorCount map[float32]int
+	acceptedValue map[float32]interface{}
+	decidedValue  interface{}
+	quorumSize    int
+	listener      net.Listener
 }
 
-func (learner *Learner) RecieveAccepted(arg *AcceptMsg, reply *EmptyMsg) error {
-	// logPrint("[learner :%s RecieveAccepted msg :%v]", learner.localAddr, arg)
-	learner.decideValue = arg.Value
+func (le *Learner) getQuorumSize() int {
+	le.mu.Lock()
+	size := le.quorumSize
+	le.mu.Unlock()
+	return size
+}
+
+func (le *Learner) RecieveAccepted(arg *AcceptedMsg, reply *EmptyMsg) error {
+	// PASS
 	return nil
 }
 
-func (learner *Learner) startRpc() {
+func (le *Learner) startRpc() {
 	rpcx := rpc.NewServer()
-	rpcx.Register(learner)
-	l, e := net.Listen("tcp", learner.localAddr)
-	learner.listener = l
+	rpcx.Register(le)
+	l, e := net.Listen("tcp", le.localAddr)
+	le.listener = l
 	if e != nil {
 		log.Fatal("listen error:", e)
 	}
@@ -37,10 +48,10 @@ func (learner *Learner) startRpc() {
 	}()
 }
 
-func (learner *Learner) clean() {
-	learner.decideValue = nil
+func (le *Learner) clean() {
+	le.acceptedValue = nil
 }
 
-func (learner *Learner) close() {
-	learner.listener.Close()
+func (le *Learner) close() {
+	le.listener.Close()
 }
