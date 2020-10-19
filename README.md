@@ -23,8 +23,8 @@
 <br/>
 
 * **容错模型**
-    1. 异步网络，网络是不可靠的，消息可能丢失、重复、延迟、网络分区，但是不包括拜占庭错误，即消息不会被串改和伪造
-    2. 只要majority服务器还运行，决议就能继续进行
+    1. 异步网络，网络是不可靠的，消息可能丢失、重复、延迟、网络分区，但是不包括拜占庭错误，即消息不会被篡改和伪造
+    2. 只要大多数（majority）服务器还运行，决议就能继续进行
 <br/>
 
 * [FLP](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)**定理**
@@ -89,11 +89,13 @@
 
 ## 四、Implementing state machine
 
-basic paxos -> mutil-paxos -> replicated state machine
+1. basic paxos -> mutil-paxos -> replicated state machine
 
+2. 我的另一篇关于[Raft](https://github.com/vision9527/raft-demo)算法的分享，可以帮助大家更好的理解共识算法的实际应用和实现。
 
 ## 五、Paxos算法go语言实现
 
+* 运行测试用例：go test -v
 
 ## 六、参考
 
@@ -110,4 +112,6 @@ basic paxos -> mutil-paxos -> replicated state machine
 6. [Google TechTalks About Paxos](https://www.youtube.com/watch?v=d7nAGI_NZPk)
 
 7. [Paxos lecture (Raft user study)](https://www.youtube.com/watch?v=JEpsBg0AO6o)
+
+8. [raft-demo](https://github.com/vision9527/raft-demo)
 
