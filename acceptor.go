@@ -26,6 +26,13 @@ func (a *Acceptor) getLearnerPeers() []string {
 	return peers
 }
 
+func (a *Acceptor) getAddr() string {
+	a.mu.Lock()
+	addr := a.localAddr
+	a.mu.Unlock()
+	return addr
+}
+
 func (a *Acceptor) RecievePrepare(arg *PrepareMsg, reply *PromiseMsg) error {
 	// logPrint("[acceptor %s RecievePrepare:%v ]", a.localAddr, arg)
 	reply.ProposeID = arg.ProposeID
@@ -37,7 +44,7 @@ func (a *Acceptor) RecievePrepare(arg *PrepareMsg, reply *PromiseMsg) error {
 		reply.AccepedID = a.acceptedID
 		reply.AccepedValue = a.acceptedValue
 	}
-	// TODO 持久化promise的数据
+	// PASS 持久化promise的数据
 	return nil
 }
 
@@ -46,6 +53,7 @@ func (a *Acceptor) RecieveAccept(arg *AcceptMsg, reply *AcceptedMsg) error {
 	reply.ProposeID = arg.ProposeID
 	if arg.ProposeID >= a.promiseID {
 		reply.Success = true
+		reply.AcceptorAddr = a.getAddr()
 		a.promiseID = arg.ProposeID
 		a.acceptedID = arg.ProposeID
 		a.acceptedValue = arg.Value
@@ -53,7 +61,7 @@ func (a *Acceptor) RecieveAccept(arg *AcceptMsg, reply *AcceptedMsg) error {
 			callRpc(learnerPeer, "Learner", "RecieveAccepted", reply, &EmptyMsg{})
 		}
 	}
-	// TODO 持久化accepted的数据
+	// PASS 持久化accepted的数据
 	return nil
 }
 
