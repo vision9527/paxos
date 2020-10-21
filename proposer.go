@@ -98,7 +98,7 @@ func (p *Proposer) runTwoPhase() {
 		}
 
 		select {
-		case <-time.After(2 * time.Second):
+		case <-time.After(200 * time.Millisecond):
 			continue
 		case <-promiseFailedChan:
 			continue
@@ -141,7 +141,7 @@ func (p *Proposer) runTwoPhase() {
 			}(peerAddr, acceptMsgReq)
 		}
 		select {
-		case <-time.After(2 * time.Second):
+		case <-time.After(200 * time.Millisecond):
 			continue
 		case <-acceptFailedChan:
 			continue

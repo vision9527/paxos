@@ -53,7 +53,7 @@ func generateNumber(me int, number float32) float32 {
 		}
 		return float32(n)
 	}
-	i := int(number) + 1
+	i := int(number) + 1 // 暂时不考虑float的精度问题
 	strNum = fmt.Sprintf("%d.%d", i, me)
 	n, err := strconv.ParseFloat(strNum, 32)
 	if err != nil {
