@@ -36,14 +36,15 @@ func (a *Acceptor) getAddr() string {
 func (a *Acceptor) RecievePrepare(arg *PrepareMsg, reply *PromiseMsg) error {
 	// logPrint("[acceptor %s RecievePrepare:%v ]", a.localAddr, arg)
 	reply.ProposeID = arg.ProposeID
-	if arg.ProposeID >= a.promiseID {
+	if arg.ProposeID > a.promiseID {
 		a.promiseID = arg.ProposeID
 		reply.Success = true
+		if a.acceptedID > 0 && a.acceptedValue != nil {
+			reply.AccepedID = a.acceptedID
+			reply.AccepedValue = a.acceptedValue
+		}
 	}
-	if a.acceptedID > 0 && a.acceptedValue != nil {
-		reply.AccepedID = a.acceptedID
-		reply.AccepedValue = a.acceptedValue
-	}
+
 	// PASS 持久化promise的数据
 	return nil
 }

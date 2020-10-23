@@ -78,7 +78,7 @@ func close(p []*Proposer, a []*Acceptor, l []*Learner) {
 func checkOne(t *testing.T, p []*Proposer, value interface{}) {
 	for _, i := range p {
 		if i.decidedValue != value {
-			t.Fatalf("wrong decide value, want value:%v decided value:%v", value, i.decidedValue)
+			t.Fatalf("wrong decided value, want value:%v decided value:%v", value, i.decidedValue)
 		}
 	}
 }
@@ -88,14 +88,17 @@ func checkMany(t *testing.T, p []*Proposer) {
 	var value interface{}
 	for _, i := range p {
 		if i.decidedValue == nil {
-			t.Fatalf("wrong decide value, decided value: nil")
+			t.Fatalf("wrong decided value, decided value: nil")
 		}
 		if value != nil && value != i.decidedValue {
-			t.Fatalf("wrong decide value, previous decided value:%v current decided value:%v", value, i.decidedValue)
+			t.Fatalf("wrong decided value, previous decided value:%v current decided value:%v", value, i.decidedValue)
 		}
 		if value == nil {
 			value = i.decidedValue
 		}
+	}
+	if value == nil {
+		t.Fatalf("wrong decided value, should have one")
 	}
 }
 
