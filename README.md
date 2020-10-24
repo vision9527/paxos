@@ -95,7 +95,7 @@
 
 2. 本人另一篇关于[Raft](https://github.com/vision9527/raft-demo)算法的分享，可以帮助大家更好的理解共识算法的实际应用和实现。
 
-## 五、Paxos Implement With Go
+## 五、Basic Paxos Implement With Go
 
 * 运行测试用例：go test -v
 
@@ -116,4 +116,6 @@
 7. [Paxos lecture (Raft user study)](https://www.youtube.com/watch?v=JEpsBg0AO6o)
 
 8. [raft-demo](https://github.com/vision9527/raft-demo)
+
+9. [Paxos Made Live - Chubby](https://www.cs.utexas.edu/users/lorenzo/corsi/cs380d/papers/paper2-1.pdf)
 
