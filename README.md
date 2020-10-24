@@ -93,7 +93,7 @@
 
 1. basic paxos -> mutil-paxos -> replicated state machine
 
-2. 我的另一篇关于[Raft](https://github.com/vision9527/raft-demo)算法的分享，可以帮助大家更好的理解共识算法的实际应用和实现。
+2. 本人另一篇关于[Raft](https://github.com/vision9527/raft-demo)算法的分享，可以帮助大家更好的理解共识算法的实际应用和实现。
 
 ## 五、Paxos Implement With Go
 

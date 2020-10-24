@@ -156,6 +156,7 @@ func (p *Proposer) runTwoPhase() {
 func (p *Proposer) prepare() PrepareMsg {
 	p.mu.Lock()
 	proposerID := generateNumber(p.me, p.proposerID)
+	// PASS 持久化当前最高序号
 	msg := PrepareMsg{
 		ProposeID: proposerID,
 	}
