@@ -79,19 +79,19 @@
 
 ![live_lock](./images/live_lock.png)
 
-## 三、Mutil Paxos
+## 三、Multi Paxos
 
-* 当需要决定多个值时就需要连续执行多次Paxos算法，一般执行一次Paxos算法的过程称作A Paxos run 或者 A Paxos instance，连续决定多个值则就需要执行多次Paxos run
+* 当需要决定多个值时就需要连续执行多次Paxos算法，一般执行一次Paxos算法的过程称作A Paxos Run 或者 A Paxos Instance，连续决定多个值则就需要执行多次Paxos
 
 * 为了避免死锁的情况，一般选举一个leader
 
-* 两阶段协议效率太低，可以有优化的空间。在单个Leader的情况下，如果前一次已经accept成功，接下来不再需要prepare阶段，直接进行accept。
+* 两阶段协议效率太低，可以有优化的空间。在单个Leader的情况下，如果前一次已经accept成功，接下来不再需要prepare阶段，直接进行accept
 
 ![mutil-paxos](./images/mutil_paxos.png)
 
 ## 四、Implementing State Machine
 
-1. basic paxos -> mutil-paxos -> replicated state machine
+1. Basic Paxos -> Multi Paxos -> Replicated State Machine
 
 2. 本人另一篇关于[Raft](https://github.com/vision9527/raft-demo)算法的分享，可以帮助大家更好的理解共识算法的实际应用和实现。
 
@@ -119,3 +119,4 @@
 
 9. [Paxos Made Live - Chubby](https://www.cs.utexas.edu/users/lorenzo/corsi/cs380d/papers/paper2-1.pdf)
 
+## 七、个人解读TODO

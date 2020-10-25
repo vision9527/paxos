@@ -187,37 +187,6 @@ func TestManyProposerUnreliable(t *testing.T) {
 	}
 	defer close(p, a, l)
 
-	for i, proposer := range p {
-		proposer.propose(100 + i)
-	}
-	time.Sleep(1 * time.Second)
-	checkMany(t, p)
-	clean(p, a, l)
-
-	for i, proposer := range p {
-		proposer.propose(200 + i)
-	}
-	time.Sleep(1 * time.Second)
-	checkMany(t, p)
-	clean(p, a, l)
-
-	for i, proposer := range p {
-		proposer.propose(300 + i)
-	}
-	time.Sleep(1 * time.Second)
-	checkMany(t, p)
-	clean(p, a, l)
-	logPrint("TestManyProposerUnreliable proposer num:%d, acceptor num:%d, learner num:%d end", pNum, aNum, lNum)
-}
-
-func TestMutilPaxos(t *testing.T) {
-	pNum := 3
-	aNum := 3
-	lNum := 2
-	logPrint("TestMutilPaxos proposer num:%d, acceptor num:%d, learner num:%d begin", pNum, aNum, lNum)
-	p, a, l := makeCluster(pNum, aNum, lNum)
-	defer close(p, a, l)
-
 	// instance 1 -> log index 1
 	for i, proposer := range p {
 		proposer.propose(100 + i)
@@ -241,5 +210,5 @@ func TestMutilPaxos(t *testing.T) {
 	time.Sleep(1 * time.Second)
 	checkMany(t, p)
 	clean(p, a, l)
-	logPrint("TestMutilPaxos proposer num:%d, acceptor num:%d, learner num:%d end", pNum, aNum, lNum)
+	logPrint("TestManyProposerUnreliable proposer num:%d, acceptor num:%d, learner num:%d end", pNum, aNum, lNum)
 }
