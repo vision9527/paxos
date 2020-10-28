@@ -79,7 +79,7 @@ func (p *Proposer) runTwoPhase() {
 					}
 				}()
 
-				promiseMsgResp, err := p.sendPrepare(peerAddr, &prepareMsgReq)
+				promiseMsgResp, err := p.sendPrepare(peerAddr, &prepareMsgReq) // 这里用同步的方式处理，就不需要考虑消息重复发送了
 				if err != nil || prepareMsgReq.ProposeID != promiseMsgResp.ProposeID {
 					atomic.AddInt64(&promiseFailedNum, 1)
 					return
