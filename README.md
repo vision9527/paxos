@@ -83,9 +83,11 @@
 
 * 当需要决定多个值时就需要连续执行多次Paxos算法，一般执行一次Paxos算法的过程称作A Paxos Run 或者 A Paxos Instance，连续决定多个值则就需要执行多次Paxos
 
-* 为了避免死锁的情况，一般选举一个leader
+* 为了解决死锁也就是进展性问题，通过选举一个leader，由唯一的leader发起提议
 
 * 两阶段协议效率太低，可以有优化的空间。在单个Leader的情况下，如果前一次已经accept成功，接下来不再需要prepare阶段，直接进行accept
+
+* 多个instance可以并发的进行
 
 ![mutil-paxos](./images/mutil_paxos.png)
 
