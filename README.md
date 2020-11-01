@@ -101,6 +101,8 @@
 
 ## 六、The Part-Time Parliament
 
+* [The The Part-Time Parliament 个人阅读笔记](https://github.com/vision9527/paxos/blob/main/lamport-paxos-vision9527.pdf)
+
 ## 七、Reference
 
 1. [The Part-Time Parliament](http://lamport.azurewebsites.net/pubs/lamport-paxos.pdf)
