@@ -11,6 +11,7 @@ type PrepareMsg struct {
 }
 
 type PromiseMsg struct {
+	AcceptorAddr string
 	ProposeID    float32
 	Success      bool
 	AccepedID    float32

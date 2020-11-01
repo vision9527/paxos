@@ -79,8 +79,9 @@ func (p *Proposer) runTwoPhase() {
 					}
 				}()
 
-				promiseMsgResp, err := p.sendPrepare(peerAddr, &prepareMsgReq) // 这里用同步的方式处理，就不需要考虑消息重复发送了
-				if err != nil || prepareMsgReq.ProposeID != promiseMsgResp.ProposeID {
+				promiseMsgResp, err := p.sendPrepare(peerAddr, &prepareMsgReq) // 这里用同步的方式处理，就不考虑响应消息重复接收了
+				if err != nil || prepareMsgReq.ProposeID != promiseMsgResp.ProposeID ||
+					promiseMsgResp.AcceptorAddr != peerAddr {
 					atomic.AddInt64(&promiseFailedNum, 1)
 					return
 				}
@@ -128,8 +129,9 @@ func (p *Proposer) runTwoPhase() {
 					}
 				}()
 
-				acceptedMsgResp, err := p.sendAccept(peerAddr, &acceptMsgReq)
-				if err != nil || acceptMsgReq.ProposeID != acceptedMsgResp.ProposeID {
+				acceptedMsgResp, err := p.sendAccept(peerAddr, &acceptMsgReq) // 这里用同步的方式处理，就不考虑响应消息重复接收了
+				if err != nil || acceptMsgReq.ProposeID != acceptedMsgResp.ProposeID ||
+					peerAddr != acceptedMsgResp.AcceptorAddr {
 					atomic.AddInt64(&acceptFailedNum, 1)
 					return
 				}
