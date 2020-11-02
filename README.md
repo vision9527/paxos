@@ -81,11 +81,17 @@
 
 ## 三、Multi Paxos
 
+* The Preliminary Protocol(初级协议) -> The Basic Protocol(基本协议) -> The Complete Synod Protocol(完整神会协议) -> The Multi-Decree Parliament(多法令议会协议)
+
 * 当需要决定多个值时就需要连续执行多次Paxos算法，一般执行一次Paxos算法的过程称作A Paxos Run 或者 A Paxos Instance，连续决定多个值则就需要执行多次Paxos
 
-* 为了解决死锁也就是进展性问题，通过选举一个leader，由唯一的leader发起提议
+* Multi-Paxos是由The Complete Synod Protocol衍生而来，The Complete Synod Protocol通过选主解决了进展性问题（同时也是满足一致性的）
+
+* 在Paxos算法中，选主只是为了解决进展性问题，不会影响一致性，即使出现脑裂Paxos算法也是安全的，只会影响进展性
 
 * 两阶段协议效率太低，可以有优化的空间。在单个Leader的情况下，如果前一次已经accept成功，接下来不再需要prepare阶段，直接进行accept
+
+* 一般的Multi-Paxos可以简单总结为（选主 + 两阶段的优化），但是选主也不是必须的（舍弃一定的进展性）
 
 * 多个instance可以并发的进行
 

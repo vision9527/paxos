@@ -53,7 +53,7 @@ func (a *Acceptor) RecievePrepare(arg *PrepareMsg, reply *PromiseMsg) error {
 func (a *Acceptor) RecieveAccept(arg *AcceptMsg, reply *AcceptedMsg) error {
 	// logPrint("[acceptor %s RecieveAccept:%v ]", a.localAddr, arg)
 	reply.ProposeID = arg.ProposeID
-	if arg.ProposeID >= a.promiseID {
+	if arg.ProposeID == a.promiseID {
 		reply.Success = true
 		reply.AcceptorAddr = a.getAddr()
 		a.promiseID = arg.ProposeID
