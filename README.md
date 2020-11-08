@@ -1,5 +1,7 @@
 # Paxos For Studying
 
+bilibili分享地址：https://www.bilibili.com/video/BV1C5411L7qT
+
 ## 一、Paxos Overview
 
 * Paxos( [The Part-Time Parliament](http://lamport.azurewebsites.net/pubs/lamport-paxos.pdf) )共识算法由[Leslie Lamport](http://www.lamport.org/)在1989年首次发布，后来由于大多数人不太能接受他的幽默风趣的介绍方法（其实用比喻的方式介绍长篇的理论，确实让人比较难理解），于是在2001年重新写一篇名叫 [Paxos Made Simple](http://lamport.azurewebsites.net/pubs/paxos-simple.pdf) 论文，相当于原始Paxos算法的简化版，这篇文章与原始文章在讲述Paxos算法上最大的不同就是用的都是计算机术语，看起来也轻松很多
