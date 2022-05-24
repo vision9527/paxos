@@ -4,9 +4,9 @@ bilibili分享地址：https://www.bilibili.com/video/BV1C5411L7qT
 
 ## 一、Paxos Overview
 
-* Paxos( [The Part-Time Parliament](http://lamport.azurewebsites.net/pubs/lamport-paxos.pdf) )共识算法由[Leslie Lamport](http://www.lamport.org/)在1989年首次发布，后来由于大多数人不太能接受他的幽默风趣的介绍方法（其实用比喻的方式介绍长篇的理论，确实让人比较难理解），于是在2001年重新写一篇名叫 [Paxos Made Simple](http://lamport.azurewebsites.net/pubs/paxos-simple.pdf) 论文，相当于原始Paxos算法的简化版，这篇文章与原始文章在讲述Paxos算法上最大的不同就是用的都是计算机术语，看起来也轻松很多
+* Paxos( [The Part-Time Parliament](http://lamport.azurewebsites.net/pubs/lamport-paxos.pdf) )共识算法由[Leslie Lamport](http://www.lamport.org/)在1989年首次发布，后来由于大多数人不太能接受他的幽默风趣的介绍方法（其实用比喻的方式介绍长篇的理论，确实让人比较难理解），于是在2001年重新写一篇名叫 [Paxos Made Simple](http://lamport.azurewebsites.net/pubs/paxos-simple.pdf) 论文，相当于原始Paxos算法的简化版，主要讲述两阶段共识协议部分。这篇文章与原始文章在讲述Paxos算法上最大的不同就是用的都是计算机术语，看起来也轻松很多
 
-* Paxos算法是分布式系统中的一个共识算法家族，也是第一个被证明正确性的共识算法
+* Paxos算法是分布式系统中的一个共识算法家族，也是第一个有完整数学证明的共识算法
 
 * "世界上只有两种分布式共识算法，一种是Paxos算法，另一种是类Paxos算法"
 
@@ -85,7 +85,7 @@ bilibili分享地址：https://www.bilibili.com/video/BV1C5411L7qT
 
 * The Preliminary Protocol(初级协议) -> The Basic Protocol(基本协议) -> The Complete Synod Protocol(完整神会协议) -> The Multi-Decree Parliament(多法令议会协议)
 
-* 当需要决定多个值时就需要连续执行多次Paxos算法，一般执行一次Paxos算法的过程称作A Paxos Run 或者 A Paxos Instance，连续决定多个值则就需要执行多次Paxos
+* 当需要决定多个值时就需要连续执行多次Paxos算法，一般执行一次Paxos算法的过程称作A Paxos Run 或者 A Paxos Instance
 
 * Multi-Paxos是由The Complete Synod Protocol衍生而来，The Complete Synod Protocol通过选主解决了进展性问题（同时也是满足一致性的）
 
@@ -96,6 +96,8 @@ bilibili分享地址：https://www.bilibili.com/video/BV1C5411L7qT
 * 一般的Multi-Paxos可以简单总结为（选主 + 两阶段的优化），但是选主也不是必须的（舍弃一定的进展性）
 
 * 多个instance可以并发的进行
+
+* Multi Paxos通常是指一类共识算法，不是精确的指定某个共识算法
 
 ![mutil-paxos](./images/mutil_paxos.png)
 
